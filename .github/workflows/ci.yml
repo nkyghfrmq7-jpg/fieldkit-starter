@@ -17,6 +17,11 @@ jobs:
     name: Lint, build, and test
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    # Playwright's image ships Chromium, WebKit, Firefox and every system
+    # dependency, so CI never spends time on browser downloads or apt.
+    container:
+      image: mcr.microsoft.com/playwright:v1.64.1-noble
+      options: --user 1001
 
     steps:
       - name: Checkout
@@ -39,9 +44,6 @@ jobs:
 
       - name: Build
         run: pnpm build
-
-      - name: Install Playwright browsers
-        run: pnpm exec playwright install --with-deps chromium
 
       - name: Run end-to-end tests
         run: pnpm test:e2e
