@@ -1,36 +1,115 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Fieldkit — web app starter
 
-## Getting Started
+A Next.js starter for internal operations apps. It ships with a marketing page,
+an app shell (sidebar + top bar), a dashboard wired to demo data, and a sign-in
+layout — all as editable source you can keep, delete, or replace.
 
-First, run the development server:
+## Stack
+
+| Piece      | Version |
+| ---------- | ------- |
+| Next.js    | 16.4 (App Router, Turbopack) |
+| React      | 19.3 |
+| Tailwind   | 4.3 |
+| shadcn/ui  | base-nova style, Base UI primitives |
+| TypeScript | 5.9 |
+| Extras     | next-themes, sonner, lucide-react |
+
+## Run it
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+pnpm dev        # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```bash
+pnpm build
+pnpm start      # production build on port 3000
+pnpm lint
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Routes
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Route                   | What it shows |
+| ----------------------- | ------------- |
+| `/`                     | Marketing page with a scale-ticket panel |
+| `/dashboard`            | Overview: KPI strip, shipments table, alerts, capacity |
+| `/dashboard/shipments`  | Placeholder route (empty state) |
+| `/dashboard/lots`       | Placeholder route (empty state) |
+| `/dashboard/cold-chain` | Placeholder route (empty state) |
+| `/dashboard/settings`   | Placeholder route (empty state) |
+| `/login`                | Split-screen sign-in layout |
 
-## Learn More
+## Layout
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+  app/
+    layout.tsx            fonts, theme provider, toaster
+    page.tsx              marketing page
+    globals.css           design tokens and small utilities
+    dashboard/
+      layout.tsx          sidebar + inset shell
+      page.tsx            overview screen
+      */page.tsx          placeholder routes
+    login/page.tsx        sign-in screen
+  components/
+    ui/                   shadcn/ui components (source)
+    app-sidebar.tsx       dashboard navigation
+    topbar.tsx            breadcrumb, search, account menu
+    kpi-sheet.tsx         ledger-style metric strip
+    shipments-table.tsx   filtered table with row actions and toasts
+    attention-panel.tsx   alert list
+    capacity-panel.tsx    progress bars
+    login-form.tsx        form pattern with Field components
+    page-placeholder.tsx  shared empty state
+  lib/
+    demo-data.ts          fake produce-ops fixtures
+    utils.ts              cn()
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Add a component
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+pnpm dlx shadcn@latest add dialog sheet command
+```
 
-## Deploy on Vercel
+Components land in `src/components/ui` as source, so edit them freely.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Theme
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Tokens live in `src/app/globals.css` as OKLCH CSS variables (light in `:root`,
+dark in `.dark`) and are exposed to Tailwind through `@theme inline`. Change
+`--primary`, `--background`, `--radius`, and friends to rebrand the whole app.
+
+Typefaces are loaded with `next/font` in `src/app/layout.tsx`:
+Instrument Serif for display, Instrument Sans for UI, IBM Plex Mono for codes.
+
+Small utilities defined in `globals.css`: `.font-display`, `.nums` (tabular
+figures), `.dot-grid`, `.stamp`, `.perforation`, `.rise`.
+
+## Demo data
+
+Everything on the dashboard comes from `src/lib/demo-data.ts`. Replace those
+exports with a real data source — a server component can fetch directly, or add
+a route handler / server action for writes. Delete the file once it's unused.
+
+## What is not wired
+
+- **Authentication.** `/login` is a layout demo; the form shows a toast.
+- **Database.** No ORM, no schema, no migrations.
+- **Search / command palette.** The top-bar search button is a placeholder.
+- **Tests.** No test runner is configured yet; add Vitest or Playwright.
+
+## Deploy
+
+The project is Vercel-ready with zero config. From this directory:
+
+```bash
+export VERCEL_TOKEN=...        # token from vercel.com/account/tokens
+vercel deploy -y --no-wait     # preview deployment
+vercel deploy --prod -y        # production, when you mean it
+```
+
+Or push to a Git repo and connect it in the Vercel dashboard so every branch
+gets a preview URL.
