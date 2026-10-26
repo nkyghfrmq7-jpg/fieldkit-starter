@@ -124,8 +124,10 @@ the Playwright report as a downloadable artifact.
 Live at https://fieldkit-ruby.vercel.app, connected to
 [nkyghfrmq7-jpg/fieldkit-starter](https://github.com/nkyghfrmq7-jpg/fieldkit-starter).
 
-**Every push to `main` deploys to production automatically.** Branches and pull
-requests get preview deployments.
+`main` is protected: changes land through a pull request whose
+**"Lint, build, and test"** check is green. Merging a pull request deploys to
+production automatically; other branches and pull requests get preview
+deployments.
 
 Manual deploys from the CLI, once `vercel login` has been run:
 
