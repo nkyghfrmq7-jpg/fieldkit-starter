@@ -103,7 +103,9 @@ a route handler / server action for writes. Delete the file once it's unused.
 
 ## Deploy
 
-The project is Vercel-ready with zero config. From this directory:
+The project is Vercel-ready with zero config, and builds in about 15 seconds.
+
+With a Vercel account connected:
 
 ```bash
 export VERCEL_TOKEN=...        # token from vercel.com/account/tokens
@@ -111,5 +113,24 @@ vercel deploy -y --no-wait     # preview deployment
 vercel deploy --prod -y        # production, when you mean it
 ```
 
+Without logging in, create a temporary deployment and claim it later:
+
+```bash
+vercel deploy --temporary -y --verify
+```
+
+Temporary deployments expire after 60 minutes unless claimed. The CLI prints a
+preview URL and a one-time claim URL; claiming moves the deployment into a
+Vercel account.
+
 Or push to a Git repo and connect it in the Vercel dashboard so every branch
 gets a preview URL.
+
+## Screenshots
+
+Captured from the production build with Playwright:
+
+- `docs/screenshots/landing.png`
+- `docs/screenshots/dashboard.png`
+- `docs/screenshots/dashboard-dark.png`
+- `docs/screenshots/sign-in.png`
