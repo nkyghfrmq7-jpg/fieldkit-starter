@@ -115,12 +115,15 @@ interactive runner, or `--project chromium --headed` to watch it run.
 
 ## Deploy
 
-The project is Vercel-ready with zero config, and builds in about 15 seconds.
+Live at https://fieldkit-ruby.vercel.app, connected to
+[nkyghfrmq7-jpg/fieldkit-starter](https://github.com/nkyghfrmq7-jpg/fieldkit-starter).
 
-With a Vercel account connected:
+**Every push to `main` deploys to production automatically.** Branches and pull
+requests get preview deployments.
+
+Manual deploys from the CLI, once `vercel login` has been run:
 
 ```bash
-export VERCEL_TOKEN=...        # token from vercel.com/account/tokens
 vercel deploy -y --no-wait     # preview deployment
 vercel deploy --prod -y        # production, when you mean it
 ```
