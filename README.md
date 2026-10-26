@@ -1,5 +1,7 @@
 # Fieldkit — web app starter
 
+**Live:** https://fieldkit-ruby.vercel.app — deployed on Vercel (project `fieldkit`, team `Oscar`).
+
 A Next.js starter for internal operations apps. It ships with a marketing page,
 an app shell (sidebar + top bar), a dashboard wired to demo data, and a sign-in
 layout — all as editable source you can keep, delete, or replace.
