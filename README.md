@@ -1,5 +1,7 @@
 # Fieldkit — web app starter
 
+[![CI](https://github.com/nkyghfrmq7-jpg/fieldkit-starter/actions/workflows/ci.yml/badge.svg)](https://github.com/nkyghfrmq7-jpg/fieldkit-starter/actions/workflows/ci.yml)
+
 **Live:** https://fieldkit-ruby.vercel.app — deployed on Vercel (project `fieldkit`, team `Oscar`).
 
 A Next.js starter for internal operations apps. It ships with a marketing page,
