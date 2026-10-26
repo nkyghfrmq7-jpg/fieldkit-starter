@@ -109,6 +109,10 @@ checks (menu sheet and no horizontal scroll).
 Config lives in `playwright.config.ts`; specs in `tests/`. Add `--ui` for the
 interactive runner, or `--project chromium --headed` to watch it run.
 
+GitHub Actions runs the whole gate — lint, build, and this suite — on every push
+to `main` and every pull request (`.github/workflows/ci.yml`). Failed runs upload
+the Playwright report as a downloadable artifact.
+
 ## What is not wired
 
 - **Authentication.** `/login` is a layout demo; the form shows a toast.
