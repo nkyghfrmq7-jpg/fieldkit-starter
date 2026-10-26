@@ -26,6 +26,7 @@ pnpm dev        # http://localhost:3000
 pnpm build
 pnpm start      # production build on port 3000
 pnpm lint
+pnpm test:e2e   # Playwright smoke suite
 ```
 
 ## Routes
@@ -94,12 +95,21 @@ Everything on the dashboard comes from `src/lib/demo-data.ts`. Replace those
 exports with a real data source — a server component can fetch directly, or add
 a route handler / server action for writes. Delete the file once it's unused.
 
+## Tests
+
+`pnpm test:e2e` runs Playwright against a dev server on port 3000. It covers the
+marketing page, KPI sheet and shipments table, status filtering, row-action
+toasts, the theme switch, sidebar routing, the sign-in form, and two mobile
+checks (menu sheet and no horizontal scroll).
+
+Config lives in `playwright.config.ts`; specs in `tests/`. Add `--ui` for the
+interactive runner, or `--project chromium --headed` to watch it run.
+
 ## What is not wired
 
 - **Authentication.** `/login` is a layout demo; the form shows a toast.
 - **Database.** No ORM, no schema, no migrations.
 - **Search / command palette.** The top-bar search button is a placeholder.
-- **Tests.** No test runner is configured yet; add Vitest or Playwright.
 
 ## Deploy
 

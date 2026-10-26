@@ -42,7 +42,11 @@ export function PagePlaceholder({
             </EmptyDescription>
           </EmptyHeader>
           <EmptyContent>
-            <Button variant="outline" render={<Link href="/dashboard" />}>
+            <Button
+              variant="outline"
+              nativeButton={false}
+              render={<Link href="/dashboard" />}
+            >
               Back to overview
             </Button>
           </EmptyContent>
